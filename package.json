@@ -1,0 +1,23 @@
+{
+  "name": "eth-postlist",
+  "version": "1.0.0",
+  "description": "list of posts with an ethereum smart contract",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "webpack-dev-server",
+    "build": "webpack -p"
+  },
+  "author": "vp",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "truffle-hdwallet-provider": "^1.0.17",
+    "web3": "^1.2.8",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
+  }
+}

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post List Smart Contract Application</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.png" />
+    <script src="bundle.js"></script>
+</head>
+<body>
+  <nav class="navbar bg-dark justify-content-around align-items-end">
+    <div>
+    <a class="navbar-brand mr-0 pt-0" href="/">
+      <img src="./logo.png" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+    </a>
+    <div class="nav nav-pills" id="pills-tab" role="tablist">
+        <a class="nav-item nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"><span class="material-icons">home</span><span class="d-none d-sm-block">Home</span></a>
+        <a class="nav-item nav-link" id="pills-about-tab" data-toggle="pill" href="#pills-about" role="tab" aria-controls="pills-about" aria-selected="false"><span class="material-icons">info</span><span class="d-none d-sm-block">About</span></a>
+    </div>
+  </div>
+    <div class="btn-group-vertical">
+      <button class="enableEthereumButton btn btn-outline-danger"><span class="material-icons">wifi_off</span>Connect wallet</button>
+      <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#detailsModal">
+        <span id="account-short"><span class="material-icons">lock</span>Details</span>
+      </button>
+    </div>
+  </nav>
+    <div class="gradient-stripe"></div>
+    <div class="container text-break">
+      <div class="alert alert-warning alert-dismissible fade show d-flex justify-content-center" role="alert"><span class="material-icons">notification_important</span>Only the account which created a post is allowed to update or delete it.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <div class="tab-content" id="pills-tabContent">
+      <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-info font-weight-bold" id="detailsModalLabel">Account details</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p class="mb-0">You are connected with account:</p>
+              <p id="account" class="text-info font-weight-bold text-monospace">No wallet connected</p>
+              <p class="mb-0">The current network is:</p>
+              <p id="network" class="text-info font-weight-bold text-monospace">No network detected. Try connecting your wallet.</p>
+              <p class="mb-0">Total amount of posts created with this smart contract:</p>
+              <p id="post-count" class="text-info font-weight-bold text-monospace">Check network and wallet connections.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+      <ul class="nav nav-tabs mt-3 justify-content-center" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="create-tab" data-toggle="tab" href="#create" role="tab" aria-controls="create" aria-selected="true">Create Post</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="find-tab" data-toggle="tab" href="#find" role="tab" aria-controls="find" aria-selected="false">Find Post</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="findall-tab" data-toggle="tab" href="#findall" role="tab" aria-controls="find-all" aria-selected="false">Find All Posts</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="update-tab" data-toggle="tab" href="#update" role="tab" aria-controls="update" aria-selected="false">Update Post</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="remove-tab" data-toggle="tab" href="#remove" role="tab" aria-controls="remove" aria-selected="false">Delete Post</a>
+        </li>
+      </ul>
+        <div class="tab-content" id="myTabContent">
+          <form class="tab-pane fade show active" id="create" role="tabpanel" aria-labelledby="create-tab">
+              <h2>Create a Post</h2>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Post</span>
+                </div>
+                <textarea id="content" type="text" class="form-control" aria-label="Create post"></textarea>
+              </div>
+              <div class="d-flex">
+              <button type="submit" class="btn btn-info mb-3"><span class="material-icons">add</span>Create</button>
+              <div class="spinner-border text-info ml-3 create-spinner" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              </div>
+              <p id="create-result" class="mb-0"></p>
+              <p id="create-details" class="mb-0"></p>
+              <p id="create-transactionhash" class="mb-0"></p>
+          </form>
+          <form class="tab-pane fade" id="find" role="tabpanel" aria-labelledby="find-tab">
+              <h2>Find a Post</h2>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Post id</span>
+                </div>
+                <input id="find-id" type="number" class="form-control" aria-label="Post id">
+              </div>
+              <div class="d-flex">
+              <button type="submit" class="btn btn-info mb-3"><span class="material-icons">search</span>Find</button>
+              <div class="spinner-border text-info ml-3 find-spinner" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+              <p id="find-result" class="mb-0"></p>
+          </form>
+          <form class="tab-pane fade" id="findall" role="tabpanel" aria-labelledby="findall-tab">
+            <h2>Find All Posts</h2>
+            <div class="d-flex">
+            <button id="findall-btn" type="submit" class="btn btn-info mb-3"><span class="material-icons">save_alt</span>Find All</button>
+            <div class="spinner-border text-info ml-3 findall-spinner" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+            </div>
+            <p id="findall-result" class="mb-0"></p>
+          </form>
+          <form class="tab-pane fade" id="update" role="tabpanel" aria-labelledby="update-tab">
+              <h2>Update a Post</h2>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Post id</span>
+                </div>
+                <input id="update-id" type="number" class="form-control" aria-label="Post id">
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text text-left">Update<br>Post<br> Content</span>
+                </div>
+                <textarea id="update-content type="text" class="form-control" aria-label="Create post"></textarea>
+              </div>
+              <div class="d-flex">
+              <button type="submit" class="btn btn-info mb-3"><span class="material-icons">create</span>Update</button>
+              <div class="spinner-border text-info ml-3 update-spinner" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              </div>
+              <p id="update-result" class="mb-0"></p>
+              <p id="update-details" class="mb-0"></p>
+              <p id="update-transactionhash" class="mb-0"></p>
+          </form>
+          <form class="tab-pane fade" id="remove" role="tabpanel" aria-labelledby="remove-tab">
+              <h2>Delete a Post</h2>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Post id</span>
+                </div>
+                <input id="remove-id" type="number" class="form-control" aria-label="Post id">
+              </div>
+              <div class="d-flex">
+              <button type="submit" class="btn btn-info mb-3"><span class="material-icons">delete</span>Delete</button>
+              <div class="spinner-border text-info ml-3 remove-spinner" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+              <p id="remove-result" class="mb-0"></p>
+              <p id="remove-details" class="mb-0"></p>
+              <p id="remove-transactionhash" class="mb-0"></p>
+          </form>
+        </div>
+        </div>
+        <div class="tab-pane fade mt-3" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab">
+          <div class="alert alert-primary mt-3 " role="alert">
+            <h2 class="mt-0">About</h2>
+            <div>
+              <div class="d-flex mb-3">
+              <span class="material-icons text-warning">priority_high</span>
+              <div>
+              <p class="ml-0 mb-0 text-warning">To use this application you'll need&nbsp;<a class="btn-warning" rel="noopener noreferrer" target="_blank" href="https://metamask.io/">MetaMask</a>.</p>
+              <p class="ml-0 mb-0 text-warning">You'll also need some testnet Ether from&nbsp;<a class="btn-warning" rel="noopener noreferrer" target="_blank" href="https://faucet.ropsten.be/">Ropsten faucet</a>.</p>
+              </div>
+              </div>
+              <p class="mb-0 ml-0">This application allows you to create new posts which are stored in a smart contract on the Ethereum blockchain. The posts can also be updated or deleted, and you can search and read posts by their id number.</p>
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
+    <footer class="footer bg-dark text-center">
+      <div class="gradient-stripe"></div>
+      <div class="container">
+        <a href="https://github.com/vponline" rel="noopener noreferrer" target="_blank" class="d-block">Github</a>
+        <img class="mb-3" src="favicon.png" height="50" alt="logo">
+      </div>
+    </footer>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>
