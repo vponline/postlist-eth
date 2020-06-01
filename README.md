@@ -10,3 +10,7 @@ Note: Metamask wallet has to be connected to use the application
 3. Infura, Truffle, Remix
 
 <img src="https://media.giphy.com/media/f4U5wQTeVhHpVyaWHO/giphy.gif" width="700" />
+
+<img src="https://media.giphy.com/media/ekdF5CqwTPtt8fcCVP/giphy.gif" width="700" />
+
+<img src="https://media.giphy.com/media/h4C8I7PIcbKOtwGHXW/giphy.gif" width="700" />
