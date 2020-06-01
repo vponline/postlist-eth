@@ -8,3 +8,5 @@ Note: Metamask wallet has to be connected to use the application
 1. Smart contract with Solidity
 2. Front-end with JavaScript and Web3.js
 3. Infura, Truffle, Remix
+
+<img src="https://media.giphy.com/media/f4U5wQTeVhHpVyaWHO/giphy.gif" width="700" />
