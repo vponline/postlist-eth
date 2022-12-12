@@ -13,7 +13,7 @@
   "author": "vp",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "truffle-hdwallet-provider": "^1.0.17",
     "web3": "^1.2.8",
     "webpack": "^4.43.0",
